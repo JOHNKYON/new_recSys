@@ -11,5 +11,5 @@ pg.pg_init()
 
 # print segment.seg(pg.get_edu())
 
-[map(lambda x: output_file.write(x), ele) for ele in segment.seg(pg.get_edu())]
+[[map(lambda x: output_file.write(x), ele) for ele in mlist] for mlist in segment.seg(pg.get_edu())]
 # output_file.write(segment.seg(pg.get_edu()))

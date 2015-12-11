@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
 from __future__ import absolute_import
+from __future__ import unicode_literals
+
 
 import gensim
 import psycopg2
@@ -8,6 +10,7 @@ import codecs
 import re
 import jieba
 import data
+import nltk
 
 
 def __clean_content(raw):
@@ -25,10 +28,10 @@ def __clean_content(raw):
     # return texts_raw
 
     # 分词
-    texts_splited = [reduce(lambda x, y: x + jieba.lcut(y), text, []) for text in texts_raw]
+    texts_splited = [[reduce(lambda x, y: x + jieba.lcut(y), text, []) for text in temp_list] for temp_list in texts_raw]
 
     # 过滤停用词
-    texts_filtered = [[word for word in text if word not in data.stopwords] for text in texts_splited]
+    texts_filtered = [[[word for word in text if word not in data.stopwords] for text in temp_filt] for temp_filt in texts_splited]
 
     # 过滤低频词
     # all_words = sum(texts_filtered, [])
