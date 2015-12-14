@@ -38,9 +38,13 @@ def __clean_content(raw):
     # words_once = {word for word in set(all_words) if all_words.count(word) == 1}
     # texts = [[word for word in text if word not in words_once] for text in texts_filtered]
     return texts_filtered
-    return texts_raw
+    # return texts_raw
 
 
 # 测试分词
 def seg(raw):
+    """
+
+    :rtype : object
+    """
     return __clean_content(raw)
