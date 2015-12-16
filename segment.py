@@ -44,7 +44,7 @@ def __clean_content(raw):
 # 测试分词
 def seg(raw):
     """
-
+    返回的结果是一个三层list,第一层为单条记录的list，第二层为记录中的属性的list，第三层为每个属性的分词结果的list
     :rtype : object
     """
     return __clean_content(raw)
