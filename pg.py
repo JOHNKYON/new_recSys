@@ -33,7 +33,7 @@ def get_edu():
     :return:
     """
     # sql_edu = "SELECT id, major, edu_intr, work_title, work_intr FROM person limit 10000;"
-    sql_edu = "SELECT id, major, edu_intr, work_title, work_intr FROM person limit 5;"
+    sql_edu = "SELECT id, major, edu_intr, work_title, work_intr FROM person limit 10;"
     cursor = get_cursor()
     cursor.execute(sql_edu)
     raw = cursor.fetchall()

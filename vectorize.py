@@ -5,6 +5,7 @@ import segment
 import pg
 import codecs
 import topic_model
+import gensim
 
 output_file = codecs.open("data/doc_vec.txt", 'wb', encoding='utf-8')
 pg.pg_init()
@@ -37,5 +38,10 @@ for ele in corpus_tfidf:
 
 '''for ele in topic_model.dictionary.token2id:
     output_file.write(ele+' ')'''
+
+test_sample = topic_model.dictionary.doc2bow(raw[0])
+print test_sample
+print topic_model.model[test_sample]
+
 
 output_file.close()
