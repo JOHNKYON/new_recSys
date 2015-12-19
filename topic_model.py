@@ -80,7 +80,7 @@ def _build_lsi():
     tfidf = _build_tfidf()
     global index
     # 建立LSI模型
-    lsi = gensim.models.LsiModel(tfidf[corpus], id2word=dictionary, num_topics=200)
+    lsi = gensim.models.LsiModel(tfidf[corpus], id2word=dictionary, num_topics=20)
     # 建立相似度索引
     index = gensim.similarities.MatrixSimilarity(lsi[corpus])
     # index = gensim.similarities.Similarity("lsi_index", lsi[corpus], num_features=lsi.num_topics)

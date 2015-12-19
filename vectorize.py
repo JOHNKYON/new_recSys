@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from __future__ import absolute_import
 
 import segment
 import pg
@@ -21,8 +22,9 @@ pg.pg_init()
         output_file.write('\t||\t')
     output_file.write('\n')
 '''
-
-raw = map(lambda x: x[0] + x[1], segment.seg(pg.get_edu()))
+raw = list()
+people = pg.get_edu(0, 0)
+raw = map(lambda x: x[0] + x[1], segment.seg(people))
 
 topic_model.build_lsi(raw)
 
@@ -39,9 +41,28 @@ for ele in corpus_tfidf:
 '''for ele in topic_model.dictionary.token2id:
     output_file.write(ele+' ')'''
 
-test_sample = topic_model.dictionary.doc2bow(raw[0])
-print test_sample
-print topic_model.model[test_sample]
+# print raw[0]
+# raw_edu = map(lambda x: x[0:2], raw)
+for ele in raw:
+    test_sample = topic_model.dictionary.doc2bow(ele)
+    # print test_sample
+    query_lsi = topic_model.model[test_sample]
+    # print query_lsi
+    sims = topic_model.index[query_lsi]
+    sorted_sims = sorted(list(enumerate(sims)), key=lambda item: -item[1])
+    for x in sorted_sims:
+        if x[1] > 0.9:
+            for attr in people[x[0]]:
+                if type(attr) is long:
+                    output_file.write(str(attr))
+                else:
+                    attr = attr.decode("utf-8")
+                    output_file.write(attr+' ')
+                output_file.write('\t')
+            output_file.write('\n')
+        else:
+            output_file.write('\n\n')
+            break
 
 
 output_file.close()
